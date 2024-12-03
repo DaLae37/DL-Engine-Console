@@ -47,7 +47,7 @@ void Release() {
 void SetConsoleSize(int width, int height) {
     COORD maxSize = GetLargestConsoleWindowSize(console);
     width = (width < maxSize.X) ? width : maxSize.X;
-    height = (height < maxSize.Y) ? width : maxSize.Y;
+    height = (height < maxSize.Y) ? height : maxSize.Y;
 
     COORD bufferSize;
     bufferSize.X = width;

@@ -10,7 +10,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     CreateConsole();
 
     // Setting Console Size
-    width = 300;
+    width = 200;
     height = 50;
     title = L"DL-Engine";
 
