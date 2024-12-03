@@ -4,6 +4,7 @@
 #define DELAY_CLOSE //If you want close console immediately, remove this line
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd) {
+    setlocale(LC_ALL, "");
     before = clock();
 
     // Create Console
@@ -18,6 +19,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     
     CreateScene();
     while (!isGameOver) {
+        CheckInputEvent();
+
         Update(GetDeltaTime());
     }
     

@@ -7,23 +7,35 @@ void CreateScene() {
 }
 
 void Update(float deltaTime) {
-    onKey = '0';
     Render();
-    if (_kbhit()) { // Return 1 if there is a pressed key, return 0 if there is no key
-        onKey = _getch(); // Save the ASCII value of the key received using _getch()
-        while (_kbhit()) { 
-            _getch(); // Remove all remaining datas from input buffer
+    if (isKeyboardInput) {
+        onKey = keyEvent.uChar.AsciiChar;
+        if (keyEvent.bKeyDown) {
+            SetPosition(150, 10);
+            SetColor(WHITE, BLACK);
+            printf("input key : %c", onKey);
+            if (onKey == 'p') {
+                Release();
+            }
+            else if (onKey == 'k') {
+                PlaySoundOnce(L"Resources/Sounds/effect.wav");
+            }
         }
     }
-
-    if (onKey == 'p') {
-        Release();
+    else if (isMouseInput) {
+        if (mouseEvent.dwButtonState & FROM_LEFT_1ST_BUTTON_PRESSED) {
+            COORD mousePosition = GetMousePosition();
+            SetPosition(150, 37);
+            SetColor(RED, BLUE);
+            printf("x : %d y : %d", mousePosition.X, mousePosition.Y);
+        }
     }
-    else if (onKey == 'k') {
-        PlaySoundOnce(L"Resources/Sounds/effect.wav");
-    }
+    SetPosition(150, 20);
+    SetColor(BLUE, RED);
+    printf("deltaTime : %f", deltaTime);
 }
 
 void Render() {
     Draw(logo, 0, 0, WHITE, BLACK);
+    Draw(L"마우스와 키보드를 눌러보세요", 100, 10, RED, BLACK);
 }

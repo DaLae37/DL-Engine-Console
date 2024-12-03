@@ -7,6 +7,7 @@
 #include <wchar.h>
 #include <stdlib.h>
 #include <time.h>
+#include <locale.h>
 
 // Windows Header
 #include <windows.h>
@@ -36,7 +37,12 @@ extern wchar_t* title; // Console Title
 
 // Console Values
 extern FILE* fp; // Reconnected Standard Stream
-extern HANDLE console; // Console Handle
+extern HANDLE consoleInput; // Console Input Handle
+extern HANDLE consoleOutput; // Console Output Handle
+extern bool isMouseInput; // Check Mouse Input
+extern MOUSE_EVENT_RECORD mouseEvent; // Console Mouse Event
+extern bool isKeyboardInput; // Check Keyboard Input
+extern KEY_EVENT_RECORD keyEvent; // Console Keyboard Event
 
 // Game Setting
 extern bool isGameOver; // Flag Value to Check Looping
@@ -80,9 +86,13 @@ void SetPosition(int x, int y);
 // Color Setting
 void SetColor(int newColor, int newBgColor);
 // Draw Bitmap into Console
-void Draw(wchar_t* bitmap, int x, int y, int newColor, int newBgColor);
+void Draw(const wchar_t* bitmap, int x, int y, int newColor, int newBgColor);
+// Check Input Events Every Frames
+void CheckInputEvent();
 // Get Delta(current_frame - before_frame) Time
 float GetDeltaTime();
+// Get Mouse Position in Console
+COORD GetMousePosition();
 // Play Background Sound
 void PlaySoundLoop(const wchar_t* path);
 // Play Effect Sound
